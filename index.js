@@ -1,64 +1,45 @@
 import express from 'express'
-import bancoDeDados from './repository/index.js'
 
 const app = express()
 
-// buscar  - get - /api/pessoa/:id 
-// criar   - get - /api/pessoa
-// alterar - get - /api/alterar/:id
-// deletar - get - /api/deletar/:id
-// buscarT - get - /api/buscar      <--------------
+app.get("/api/v1/somar", (req, res) => {
+    const { num1, num2 } = req.query
+    const resultado = Number(num1) + Number(num2)
 
-// buscar todos
-app.get("/api/pessoas", (req, res) => {
-    res.send({ pessoas: bancoDeDados })
+    res.status(200).send({
+        message: resultado
+    })
 })
 
-// buscar um
-app.get("/api/pessoa/:id", (req, res) => {
-    const id = req.params.id
-    const pessoa = bancoDeDados.find(it => it.id == id)
-    if (!pessoa) {
-        res.send({ message: "Pessoa não encontrada" })
-        return
-    }
-    res.send({ pessoa })
+// subtrair
+app.get("/api/v1/subtrair", (req, res) => {
+    const { num1, num2 } = req.query
+    const resultado = Number(num1) - Number(num2)
+
+    res.status(200).send({
+        message: resultado
+    })
 })
 
-//criar
-app.get("/api/pessoa", (req, res) => {
-    const { id, name } = req.query
-    if(!id || !name) {
-        res.send({ message: "Favor informar id e name" })
-        return 
-    }
-    bancoDeDados.push({ id, name })
-    res.send({ message: "Pessoa criada com sucesso" })
+
+// mult
+app.get("/api/v1/multiplicar", (req, res) => {
+    const { num1, num2 } = req.query
+    const resultado = Number(num1) * Number(num2)
+
+    res.status(200).send({
+        message: resultado
+    })
 })
 
-//alterar
-app.get("/api/alterar/:id", (req, res) => {
-    const id = req.params.id
-    const { name } = req.query
-    const pessoa = bancoDeDados.find(it => it.id == id)
-    if(!pessoa) {
-        res.send({ message: "Favor informar id" })
-        return 
-    }
-    pessoa.name = name
-    res.send({ message: "Pessoa alterada com sucesso" })
-})
+// div
+app.get("/api/v1/dividir", (req, res) => {
+    const { num1, num2 } = req.query
+    const resultado = Number(num1) / Number(num2)
 
-//deletar
-app.get("/api/deletar/:id", (req, res) => {
-    const id = req.params.id
-    const pessoa = bancoDeDados.find(it => it.id == id)
-    if(!pessoa) {
-        res.send({ message: "Favor informar id e name" })
-        return 
-    }
-    bancoDeDados.splice(it => it.id == id, 1)
-    res.send({ message: "Pessoa deletada com sucesso" })
+    res.status(200).send({
+        message: resultado
+    })
 })
 
 app.listen(3000, () => {
