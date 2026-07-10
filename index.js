@@ -3,20 +3,14 @@ import bancoDeDados from './repository/index.js'
 
 const app = express()
 
-// buscar  - get - /api/pessoa/:id 
-// criar   - get - /api/pessoa
-// alterar - get - /api/alterar/:id
-// deletar - get - /api/deletar/:id
-// buscarT - get - /api/buscar      <--------------
-
 // buscar todos
-app.get("/api/pessoas", (req, res) => {
-    res.send({ pessoas: bancoDeDados })
+app.get("api/pessoas", (req, res) => {
+    console.log(bancoDeDados)
 })
 
 // buscar um
 app.get("/api/pessoa/:id", (req, res) => {
-    const id = req.params.id
+    const id = req.params.codigo
     const pessoa = bancoDeDados.find(it => it.id == id)
     if (!pessoa) {
         res.send({ message: "Pessoa não encontrada" })
@@ -33,11 +27,10 @@ app.get("/api/pessoa", (req, res) => {
         return 
     }
     bancoDeDados.push({ id, name })
-    res.send({ message: "Pessoa criada com sucesso" })
 })
 
 //alterar
-app.get("/api/alterar/:id", (req, res) => {
+app.get("api/alterar/:id", (req, res) => {
     const id = req.params.id
     const { name } = req.query
     const pessoa = bancoDeDados.find(it => it.id == id)
@@ -46,7 +39,7 @@ app.get("/api/alterar/:id", (req, res) => {
         return 
     }
     pessoa.name = name
-    res.send({ message: "Pessoa alterada com sucesso" })
+    res.send({ "Pessoa alterada com sucesso" })
 })
 
 //deletar
@@ -61,6 +54,8 @@ app.get("/api/deletar/:id", (req, res) => {
     res.send({ message: "Pessoa deletada com sucesso" })
 })
 
-app.listen(3000, () => {
+const app = express()
+
+app.listen(300o, () => {
     console.log("Servidor escutando na porta 3000")
 })
