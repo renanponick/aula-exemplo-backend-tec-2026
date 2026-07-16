@@ -1,48 +1,51 @@
 import express from 'express'
+import cachorro 
+    from './router/cachorro.js'
 
 const app = express()
 
 app.use(express.json())
 
-app.post("/api/v1/somar", (req, res) => {
-    const { num1, num2 } = req.body
-    const resultado = Number(num1) + Number(num2)
+app.use('/api/v1/cachorro', cachorro)
 
-    res.status(200).send({
-        message: resultado
-    })
-})
+// app.post("/api/v1/somar", (req, res) => {
+//     const { num1, num2 } = req.body
+//     const resultado = Number(num1) + Number(num2)
 
-// subtrair
-app.post("/api/v1/subtrair", (req, res) => {
-    const { num1, num2 } = req.body
-    const resultado = Number(num1) - Number(num2)
+//     res.status(200).send({
+//         message: resultado
+//     })
+// })
 
-    res.status(200).send({
-        message: resultado
-    })
-})
+// // subtrair
+// app.post("/api/v1/subtrair", (req, res) => {
+//     const { num1, num2 } = req.body
+//     const resultado = Number(num1) - Number(num2)
 
+//     res.status(200).send({
+//         message: resultado
+//     })
+// })
 
-// mult
-app.get("/api/v1/multiplicar", (req, res) => {
-    const { num1, num2 } = req.query
-    const resultado = Number(num1) * Number(num2)
+// // mult
+// app.get("/api/v1/multiplicar", (req, res) => {
+//     const { num1, num2 } = req.query
+//     const resultado = Number(num1) * Number(num2)
 
-    res.status(200).send({
-        message: resultado
-    })
-})
+//     res.status(200).send({
+//         message: resultado
+//     })
+// })
 
-// div
-app.get("/api/v1/dividir", (req, res) => {
-    const { num1, num2 } = req.query
-    const resultado = Number(num1) / Number(num2)
+// // div
+// app.get("/api/v1/dividir", (req, res) => {
+//     const { num1, num2 } = req.query
+//     const resultado = Number(num1) / Number(num2)
 
-    res.status(200).send({
-        message: resultado
-    })
-})
+//     res.status(200).send({
+//         message: resultado
+//     })
+// })
 
 app.listen(3000, () => {
     console.log("Servidor escutando na porta 3000")
