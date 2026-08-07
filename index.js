@@ -1,11 +1,11 @@
 import express from 'express'
-import cachorro from './router/cachorro.js'
+import carro from './router/carro.js'
 
 const app = express()
 app.use(express.json())
 
-app.use('/api/v1/cachorro', cachorro)
+app.use("/api/v1/carro", carro)
 
 app.listen(3000, () => {
-    console.log("Servidor escutando na porta 3000")
+    console.log("Servidor Porta 3000")
 })
