@@ -35,8 +35,9 @@ router.post("/alterar", (req, res) => {})
 // Deletar
 router.post("/deletar", (req, res) => {
     const id = req.body.id
+    const carro = carros.findIndex(it => it.id == id)
 
-    carros.splice(it => it.id === id, 1)
+    carros.splice(carro, 1)
 
     res.send({ mensagem: "Deletado" })
 })
