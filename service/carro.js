@@ -29,7 +29,25 @@ class ServiceCarro {
         return { id, marca, ano }
     }
 
-    Alterar() {}
+    Alterar(id, marca, ano) {
+        if (!id || !marca || !ano) {
+            throw new Error("Favor informar os dados");
+        }
+
+        const index = RepositoryCarro.findIndex(carro => carro.id === Number(id));
+
+        if (index) {
+            throw new Error("Carro não encontrado");
+        }
+
+        RepositoryCarro[index] = {
+            id: Number(id),
+            marca,
+            ano
+        };
+
+        return RepositoryCarro[index]
+    }
 
     Deletar(id) {
         if (!id) {

@@ -43,7 +43,12 @@ class ControllerCarro {
 
     Alterar(req, res) {
         try {
+            const { marca, ano } = req.body
+            const id = req.params.id
 
+            ServiceCarro.Alterar(id, marca, ano)
+            
+            res.status(201).send({ mensagem: "Cadastrado com sucesso" })
         } catch (error) {
             res.status(500).send({
                 mensagem: error.message
