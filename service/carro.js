@@ -35,8 +35,10 @@ class ServiceCarro {
         if (!id) {
             throw new Error("Favor informar o ID")
         }
+        
+        const carro = RepositoryCarro.findIndex(it => it.id == id)
 
-        RepositoryCarro.splice(it => it.id === id, 1)
+        RepositoryCarro.splice(carro, 1)
 
         return id
     }
