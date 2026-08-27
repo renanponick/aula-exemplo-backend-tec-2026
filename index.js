@@ -52,12 +52,12 @@ app.get("/api/alterar/:id", (req, res) => {
 //deletar
 app.get("/api/deletar/:id", (req, res) => {
     const id = req.params.id
-    const pessoa = bancoDeDados.find(it => it.id == id)
+    const pessoa = bancoDeDados.findIndex(it => it.id == id)
     if(!pessoa) {
         res.send({ message: "Favor informar id e name" })
         return 
     }
-    bancoDeDados.splice(it => it.id == id, 1)
+    bancoDeDados.splice(pessoa, 1)
     res.send({ message: "Pessoa deletada com sucesso" })
 })
 
