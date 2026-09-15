@@ -1,11 +1,13 @@
 import express from 'express'
 import carro from './router/carro.js'
+import usuario from './router/usuario.js'
 import database from './config/database.js'
 
 const app = express()
 app.use(express.json())
 
 app.use("/api/v1/carro", carro)
+app.use("/api/v1/usuario", usuario)
 
 database.db
     .sync({ force: false })
