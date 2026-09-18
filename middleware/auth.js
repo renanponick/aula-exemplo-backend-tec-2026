@@ -13,7 +13,7 @@ export default async function authMiddleware(req, res, next) {
 
         const decoded = jwt.verify(token, segredo)
 
-        // TODO
+        req.session = decoded
 
         next()
     } catch (error) {
