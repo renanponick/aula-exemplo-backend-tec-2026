@@ -30,7 +30,9 @@ class ServiceUsuario {
             throw new Error("Favor informar todos os dados")
         }
 
-        const usuario = await RepositoryUsuario.Create(email, senha)
+        const senhaCripto = await bcrypt.hash(senha, 12)
+
+        const usuario = await RepositoryUsuario.Create(email, senhaCripto)
 
         return usuario
     }
@@ -40,7 +42,11 @@ class ServiceUsuario {
             throw new Error("Favor informar os dados");
         }
 
-        const usuarioAlterado = await RepositoryUsuario.Update(id, email, senha)
+        const senhaCripto = !senha // ternario
+            ? undefined // se sim
+            : await bcrypt.hash(senha, 12) // se nao
+
+        const usuarioAlterado = await RepositoryUsuario.Update(id, email, senhaCripto)
         
         return usuarioAlterado
     }

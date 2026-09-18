@@ -3,6 +3,7 @@ import ControllerUsuario from "../controller/usuario.js"
 import authMiddleware from "../middleware/auth.js"
 const router = express.Router()
 
+// TODO
 router.post("/login", ControllerUsuario.Login)
 router.get("/buscar", authMiddleware, ControllerUsuario.Buscar)
 router.get("/detalhe/:id", ControllerUsuario.Detalhe)
