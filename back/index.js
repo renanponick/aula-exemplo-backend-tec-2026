@@ -9,7 +9,7 @@ app.use(cors())
 
 app.use('/api/v1/user', routerUser)
 
-database.db.sync({ force: true })
+database.db.sync({ force: false })
     .then(() => {
         app.listen(3000, () => {
             console.log("Servidor rodando na 3000")
