@@ -1,24 +1,21 @@
 import express from 'express'
+import carro from './router/carro.js'
+import usuario from './router/usuario.js'
+import database from './config/database.js'
 
-// server ou app
 const app = express()
-//- path params - router
-app.get("/api/v1/somar", (req, res) => {
-    // query params
-    console.log(req.query)
+app.use(express.json())
 
-    const num1 = Number(req.query.num1)
-    const num2 = Number(req.query.num2)
-    const resultado = num1 + num2
+app.use("/api/v1/carro", carro)
+app.use("/api/v1/usuario", usuario)
 
-    res.send({ resultado, "Tarefa": "Pesquise sobre QueryParams" })
-})
-
-// aqui em diante
-
-// metodo GET da função de subtrair usando QueryParam
-// Com numero1 e numero2 ou num1 e num2
-
-app.listen(3000, () => {
-    console.log("Servidor ouvindo na porta 3000")
-})
+database.db
+    .sync({ force: false })
+    .then((_) => {
+        app.listen(3000, () => {
+            console.log("Servidor rodando na porta 3000")
+        })
+    })
+    .catch((e) => {
+        console.log(e)
+    })
